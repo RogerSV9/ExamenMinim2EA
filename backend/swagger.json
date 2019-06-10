@@ -1,0 +1,384 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "CRUD of students Minimo1",
+    "description": "CRUD Students",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3001",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Students"
+    },
+    {
+      "name": "Subjects"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/students": {
+      "post": {
+        "tags": [
+          "Students"
+        ],
+        "description": "Add new Student",
+        "parameters": [
+          {
+            "name": "Student",
+            "in": "body",
+            "description": "Student that you want to add",
+            "schema": {
+              "$ref": "#/definitions/Student"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "User created successfully"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Students"
+        ],
+        "summary": "Get all students",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Students"
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/students/{studentId}": {
+      "parameters": [
+        {
+          "name": "studentId",
+          "in": "path",
+          "required": true,
+          "description": "ID of the student",
+          "type": "string"
+        }
+      ],
+      "delete": {
+        "tags": [
+          "Students"
+        ],
+        "summary": "Delete Student",
+        "responses": {
+          "200": {
+            "description": "Student is deleted"
+          },
+          "404": {
+            "description": "Student not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Students"
+        ],
+        "summary": "Update Student",
+        "parameters": [
+          {
+            "name": "Student",
+            "in": "body",
+            "description": "Student with new values",
+            "schema": {
+              "$ref": "#/definitions/Student"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Student is updated",
+            "schema": {
+              "$ref": "#/definitions/Student"
+            }
+          },
+          "404": {
+            "description": "Student not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/subjects": {
+      "post": {
+        "tags": [
+          "Subjects"
+        ],
+        "description": "Add new Subject",
+        "parameters": [
+          {
+            "name": "Subject",
+            "in": "body",
+            "description": "Subject that you want to add",
+            "schema": {
+              "$ref": "#/definitions/Subject"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Subject created successfully"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Subjects"
+        ],
+        "summary": "Get all subjects",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Subjects"
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/subjects/addstudent": {
+      "post": {
+        "tags": [
+          "Subjects"
+        ],
+        "description": "Add student into a subject",
+        "parameters": [
+          {
+            "name": "identifiers",
+            "in": "body",
+            "description": "Id of the Student and the Subject",
+            "schema": {
+              "$ref": "#/definitions/AddUserIntoSubject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Added successfully"
+          },
+          "404": {
+            "description": "Student or Subject not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/subjects/{subjectId}": {
+      "parameters": [
+        {
+          "name": "subjectId",
+          "in": "path",
+          "required": true,
+          "description": "ID of the subject",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Subjects"
+        ],
+        "summary": "See the subject detail",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SubjectDetail"
+            }
+          },
+          "404": {
+            "description": "Subject not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Subjects"
+        ],
+        "summary": "Delete Subject",
+        "responses": {
+          "200": {
+            "description": "Subject is deleted"
+          },
+          "404": {
+            "description": "Subject not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/subjects/{subjectId}/studentdetail": {
+      "parameters": [
+        {
+          "name": "subjectId",
+          "in": "path",
+          "required": true,
+          "description": "ID of the subject",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Subjects"
+        ],
+        "summary": "See the student detail of a subject",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StudentSubjectDetail"
+            }
+          },
+          "404": {
+            "description": "Subject not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Student": {
+      "required": [
+        "name",
+        "address",
+        "phones"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "phones": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Students": {
+      "type": "array",
+      "$ref": "#/definitions/Student"
+    },
+    "Subject": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "Subjects": {
+      "type": "array",
+      "$ref": "#/definitions/Subject"
+    },
+    "AddUserIntoSubject": {
+      "required": [
+        "subjectId",
+        "studentId"
+      ],
+      "properties": {
+        "subjectId": {
+          "type": "string"
+        },
+        "studentId": {
+          "type": "string"
+        }
+      }
+    },
+    "SubjectDetail": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "students": {
+          "type": "array",
+          "items": {
+            "properties": {
+              "name": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "StudentSubjectDetail": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "students": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Student"
+          }
+        }
+      }
+    }
+  }
+}
